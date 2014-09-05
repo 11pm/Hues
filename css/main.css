@@ -96,23 +96,28 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-.black{
-    background-color: black;
+body{
+    overflow: hidden;
 }
-.bottom{
+.main{
+    background-size: cover;
+}
+.overlay{
     width: 70%;
     margin: 0 auto;
-    box-sizing:border-box;
     border: 10px solid black;
     position: absolute;
-    top: 80%;
+    top: 90%;
     left: 0;
     right: 0;
-    bottom: 5%;
     padding: 0.5em;
+    background: rgba(153, 158, 155, 0.7);
+    text-align: center;
+    clear: both;
 }
-.bottom .songName{
+.overlay .songName{
     font-size: 1.5em;
+    border-radius: 4px solid black;
 }
 
 

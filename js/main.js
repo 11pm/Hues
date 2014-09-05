@@ -20,42 +20,44 @@ function newSong(obj){
 	   	.loop()
 	    .bind( "timeupdate", function() {
 	       var timer = buzz.toTimer( this.getTime() );
-	       console.log(timer);
+	       //console.log(timer);
 	       if(timer in obj.points){
 	       		newAction(obj, timer);
 	       }
 	    });
-	updateTemplate(obj);
+	updateTemplate(obj, {style: "background-color", fill: "white"});
 	//newSong(allSongs[Math.floor(Math.random() * allSongs.length)])
 }
 function newAction(obj, time){
 	var points = obj.points;
 	var action = points[time];
-	var color = 'background-color: ';
+	var attr  = "background-color";
 	switch(action){
-		//change
-		
 		case 1:
-			obj.color = color + getRandomColor();
-			updateTemplate(obj);
+			updateTemplate(obj, {style: attr, fill: getRandomColor()});
 			break;
-		//black bg
 		case 2:
-			obj.color = color + 'black';
-			updateTemplate(obj);
+			updateTemplate(obj, {style: attr, fill: "black"});
 			break
 	}
 }
-function updateTemplate(obj){
-	var template = Handlebars.compile($('#main').html());
-	var content = {
-		songName: obj.songName,
-		style: obj.color
-	}
-	var html = template(content);
-	$('body').html(html);
+function updateTemplate(obj, bg){
+	$('.songName').html(obj.songName);
+	$('.main').css(bg.style, bg.fill);
+	var currentChar = 'img/' + getRandomCharacter();
+	console.log(currentChar);
+	$('.main').css('background-image', 'url(' + currentChar + ')');
 }
 function getRandomColor(){
-	var colors = ['#0066cc', '#e52e90'];
+	var colors = ['#0066cc', '#e52e90', '#7FFF00', '#FFD700'];
 	return colors[Math.floor(Math.random() * colors.length)];
 }
+function getRandomCharacter(){
+	var chars = ['rei.png', 'taiga.png'];
+	return chars[Math.floor(Math.random() * chars.length)];
+}
+function fillMain(){
+	$('.main').height($(window).height());
+}
+$(window).resize(fillMain);
+$(window).load(fillMain);
