@@ -7,8 +7,8 @@ for(var i = 0; i < song.length; i++){
 
 function newRandomSong(){
 	newSong(allSongs[Math.floor(Math.random() * allSongs.length)]);
-
 }
+
 newSong(allSongs[7]);
 
 
@@ -19,7 +19,7 @@ function newSong(obj){
 	console.log(obj);
 
 	console.log('Playing: ' + obj["-name"]);
-	var mySound = new buzz.sound('audi/' + obj['-name'],{
+	var mySound = new buzz.sound('audio/' + obj['-name'],{
 		formats: ['mp3']
 	});
 	mySound.play()
@@ -30,11 +30,10 @@ function newSong(obj){
 	       var duration = this.getDuration();
 	       var percent = buzz.toPercent(time, duration, 1);
 
-	       //console.log(allSongs.length/percent);
-	       //console.log(obj.rhythm);
+	      
 	    });
+
 	updateTemplate(obj, {style: "background-color", fill: "white"});
-	//newSong(allSongs[Math.floor(Math.random() * allSongs.length)])
 }
 function newAction(obj, time){
 	var points = obj.points;
@@ -52,32 +51,31 @@ function newAction(obj, time){
 function updateTemplate(obj, bg){
 
 	var character = getRandomCharacter()
-	var currentChar = 'img/' + character;
-	$('.main').css(bg.style, bg.fill);
-	$('.main').css('background-image', 'url(' + currentChar + ')');
 
-	var template = Handlebars.compile($('#overlay').html());
+	$('.main').css('background-image', 'url(' + parseSong(character) + ')').css(bg.style, bg.fill);
 
-	var context = {
-		songName: obj.title,
-		charName: character
-	};
+	$('.songName').html(obj.title);	
+	$('.charName').html(character)
 
-	$('.overlay').html(template(context));
-	}
+}
+
 function getRandomColor(){
 	var colors = ['#0066cc', '#e52e90', '#7FFF00', '#FFD700'];
 	return colors[Math.floor(Math.random() * colors.length)];
 }
-function addExt(file){
-	return file + '.png';
+
+function parseSong(file){
+	return "img/" + file.split(' ').join('_') + ".png";
 }
+
 function getRandomCharacter(){
-	var chars = ['Aisaka_Taiga', 'Zakuro'];
-	return addExt(chars[Math.floor(Math.random() * chars.length)]);
+	var chars = ['Aisaka Taiga', 'Zakuro'];
+	return chars[Math.floor(Math.random() * chars.length)];
 }
+
 function fillMain(){
 	$('.main').height($(window).height());
 }
+
 $(window).resize(fillMain);
 $(window).load(fillMain);
