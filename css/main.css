@@ -101,19 +101,15 @@ body{
 }
 .main{
     background-size: cover;
+    min-height: 100%;
+    margin: 0 auto -200px;
 }
 .overlay{
-    width: 70%;
-    margin: 0 auto;
-    border: 10px solid black;
-    position: absolute;
-    top: 90%;
-    left: 0;
-    right: 0;
-    padding: 0.5em;
-    background: rgba(153, 158, 155, 0.7);
-    text-align: center;
-    clear: both;
+    width: 100%;
+    padding: 1em;
+    background: pink;
+    height: 200px;
+
 }
 .overlay .songName{
     font-size: 1.5em;
