@@ -65,11 +65,11 @@ function getRandomColor(){
 }
 
 function parseSong(file){
-	return "img/" + file.split(' ').join('_') + ".png";
+	return "img/" + file;
 }
 
 function getRandomCharacter(){
-	var chars = ['Aisaka Taiga', 'Zakuro'];
+	var chars = ['Agiri.gif', 'Ai.png', 'Airi.gif', 'Akarin.gif', 'Akatsuki', 'Alice.png', 'Ana.png', 'Astraea.png', 'Asuha.png', 'Asuka.png', 'Ayase.png'];
 	return chars[Math.floor(Math.random() * chars.length)];
 }
 
