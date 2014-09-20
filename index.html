@@ -19,25 +19,28 @@
     </head>
     <body>
         <div class='main'>
-            <div class='overlay animated fadeIn clearfix'>
-                <div class="row">
+            <div class="row">
+                <div class='overlay animated'>
+
                     <div class="vol small-2 columns">
-                        a
+                        <span class='colorName'></span>
                     </div>
                     <div class="about small-8 columns">
-                        <span class='songName'></span><br>
-                        <span class='charName'></span>
+                        <span class='charName'></span><br>
+                        <span class='songName'></span>    
                     </div>
                     <div class="options small-2 columns">
-                        <button onclick="newRandomSong()"></button>
+                        <button onclick="utilities.newRandomSong()"></button>
                     </div>
+
+                    <div class="rhythm small-12 columns"></div>
                 </div>
             </div>
         </div>
         </script>
 
         <script src="js/vendor/jquery-1.10.2.min.js"></script>
-        <script src="js/songs.js"></script>
+        <script src="js/data.js"></script>
         <script src="js/handlebars-v2.0.0.js"></script>
         <script src="js/buzz.js"></script>
         <script src="js/main.js"></script>

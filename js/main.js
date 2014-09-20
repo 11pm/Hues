@@ -1,12 +1,107 @@
+$(document).ready(function(){
 
-var allSongs = [];
+	var utilities = {
 
-for(var i = 0; i < song.length; i++){
-	allSongs.push(song[i]);
-}
+		files: 'img/',
 
-function newRandomSong(){
-	newSong(allSongs[Math.floor(Math.random() * allSongs.length)]);
+		fillScreen: function(){
+			$('.main').height($(window).height());
+		},
+
+		parseSong: function(song){
+			return this.files + song + '.png';
+		},
+
+		getRandomFromArray: function(array){
+			var randIndex = Math.floor( Math.random() * array.length );
+			return array[randIndex];
+		},
+
+		getNextColor: function(current){
+			//if at last return first
+			if(current === colors.length){
+				return colors[0];
+			}
+			else{
+				return colors[current + 1];
+			}
+		},
+
+		shuffle: function(array){
+			var currentIndex = array.length, temporaryValue, randomIndex ;
+
+			  	// While there remain elements to shuffle...
+			  	while (0 !== currentIndex) {
+
+				    // Pick a remaining element...
+				    randomIndex = Math.floor(Math.random() * currentIndex);
+				    currentIndex -= 1;
+
+				    // And swap it with the current element.
+				    temporaryValue = array[currentIndex];
+				    array[currentIndex] = array[randomIndex];
+				    array[randomIndex] = temporaryValue;
+		 		}
+
+ 			return array;
+		}
+	}
+
+	var hues = {
+		
+		init: function(){
+			this.newRandomSong();
+		},
+
+		newRandomSong: function(){
+			//Play random song
+			utilities.shuffle(colors);
+			this.playSong(utilities.getRandomFromArray(songs));
+		},
+
+		playSong: function(obj){
+			var songName = obj.title;
+
+			var song = new buzz.sound('audio/' + obj['-name'], {
+				formats: ['mp3']
+			});
+
+			song
+			.play()
+			.fadeIn()
+			.loop();
+
+			this.updateView(obj, utilities.getNextColor(-1));
+		},
+
+		updateView: function(obj, color){
+			var character = utilities.getRandomFromArray(characters);
+
+
+			$('.main')
+			.css('background-image', 'url(' + utilities.parseSong(character) + ')')
+			.css('background-color', color.value);
+
+			$('.songName')
+			.html(obj.title);	
+			$('.charName')
+			.html(character);
+			$('.colorName')
+			.html(color.name);
+			$('.rhythm')
+			.html(obj.rhythm);
+		}
+	}
+
+	hues.init();
+
+	
+
+	utilities.fillScreen();
+	$(window).resize(utilities.fillScreen);
+});
+/*function newRandomSong(){
+	newSong(songs[Math.floor(Math.random() * songs.length)]);
 }
 
 newSong(allSongs[7]);
@@ -54,8 +149,8 @@ function updateTemplate(obj, bg){
 
 	$('.main').css('background-image', 'url(' + parseSong(character) + ')').css(bg.style, bg.fill);
 
-	$('.songName').html(obj.title);	
-	$('.charName').html(character)
+	$('.songName').html(obj.title);
+	t	$('.charName').html(character)
 
 }
 
@@ -65,12 +160,11 @@ function getRandomColor(){
 }
 
 function parseSong(file){
-	return "img/" + file;
+	return "img/" + file + ".png";
 }
 
 function getRandomCharacter(){
-	var chars = ['Agiri.gif', 'Ai.png', 'Airi.gif', 'Akarin.gif', 'Akatsuki', 'Alice.png', 'Ana.png', 'Astraea.png', 'Asuha.png', 'Asuka.png', 'Ayase.png'];
-	return chars[Math.floor(Math.random() * chars.length)];
+	return characters[Math.floor(Math.random() * characters.length)];
 }
 
 function fillMain(){
@@ -78,4 +172,4 @@ function fillMain(){
 }
 
 $(window).resize(fillMain);
-$(window).load(fillMain);
+$(window).load(fillMain);*/

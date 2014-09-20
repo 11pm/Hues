@@ -106,7 +106,8 @@ body{
 .overlay{
     width: 100%;
     padding: 1em;
-    background: pink;
+    background: #ccc;
+    opacity: 0.80;
     float: left;
 }
 .overlay .about{
