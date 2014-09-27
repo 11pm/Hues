@@ -3,6 +3,7 @@ $(document).ready(function(){
 	var utilities = {
 
 		files: 'img/',
+		colorPos: 0,
 
 		fillScreen: function(){
 			$('.main').height($(window).height());
@@ -17,13 +18,17 @@ $(document).ready(function(){
 			return array[randIndex];
 		},
 
-		getNextColor: function(current){
+		getNextColor: function(){
 			//if at last return first
-			if(current === colors.length){
+			this.colorPos++;
+			console.log(this.colorPos)
+			console.log(colors.length)
+			if(this.colorPos === colors.length){
+				this.colorPos = 0;
 				return colors[0];
 			}
 			else{
-				return colors[current + 1];
+				return colors[this.colorPos];
 			}
 		},
 
@@ -44,7 +49,9 @@ $(document).ready(function(){
 		 		}
 
  			return array;
-		}
+		},
+
+		
 	}
 
 	var hues = {
@@ -54,12 +61,15 @@ $(document).ready(function(){
 		},
 
 		newRandomSong: function(){
-			//Play random song
+			//Make color order random
 			utilities.shuffle(colors);
+			//Play random song
 			this.playSong(utilities.getRandomFromArray(songs));
 		},
 
 		playSong: function(obj){
+			buzz.all().stop();
+
 			var songName = obj.title;
 
 			var song = new buzz.sound('audio/' + obj['-name'], {
@@ -68,10 +78,14 @@ $(document).ready(function(){
 
 			song
 			.play()
-			.fadeIn()
-			.loop();
+			.loop()
+			.bind( "timeupdate", function() {
+       			var timer = buzz.toTimer( this.getTime() );
+       			
+       			hues.updateView(obj, utilities.getNextColor());
 
-			this.updateView(obj, utilities.getNextColor(-1));
+    		});
+
 		},
 
 		updateView: function(obj, color){
@@ -89,7 +103,7 @@ $(document).ready(function(){
 			$('.colorName')
 			.html(color.name);
 			$('.rhythm')
-			.html(obj.rhythm);
+			.html(obj.rhythm.length);
 		}
 	}
 
@@ -99,6 +113,10 @@ $(document).ready(function(){
 
 	utilities.fillScreen();
 	$(window).resize(utilities.fillScreen);
+
+	$('#next').click(function(){
+		hues.newRandomSong();
+	})
 });
 /*function newRandomSong(){
 	newSong(songs[Math.floor(Math.random() * songs.length)]);

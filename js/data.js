@@ -144,7 +144,9 @@ var songs = [
 
 var characters = 
 ['Ai', 'Akatsuki', 'Alice', 'Ana', 'Astraea', 'Asuha', 'Asuka', 'Ayase',
- 'CC', 'Chika', 'Chiyo', 'Crona'
+ 'CC', 'Chika', 'Chiyo', 'Crona', 'Emi', 'Etna', 'Eureka', 'Felli', 'Flandre',
+ 'Fran', 'Galil', 'Hajime Ichinose', 'Haruki Fuji', 'Homura', 'Hyatt', 
+ 'Ika Musune', 'Ika', 'Kanade', 'Kaori', 'Kasukabe', ''
 ];
 
 var colors = [{name:"Mahogany",     value:"#CD4A4A"}, {name:"Banana Mania",     value:"#FAE7B5"},

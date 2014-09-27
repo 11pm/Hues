@@ -109,6 +109,11 @@ body{
     background: #ccc;
     opacity: 0.80;
     float: left;
+    position: absolute;
+    top: 85%;
+    right: 0;
+    left: 0;
+    bottom: 0;
 }
 .overlay .about{
     text-align: center;
