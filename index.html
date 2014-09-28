@@ -22,18 +22,21 @@
             <div class="row">
                 <div class='overlay animated'>
 
-                    <div class="vol small-2 columns">
-                        <span class='colorName'></span>
-                    </div>
-                    <div class="about small-8 columns">
-                        <span class='charName'></span><br>
-                        <span class='songName'></span>    
-                    </div>
-                    <div class="options small-2 columns">
-                        <a href="#" id="next">Song</a>
-                    </div>
+                    <script type="text/x-handlebars-template" id='template'>
+                        <div class="vol small-2 columns">
+                            <span class='colorName'>{{colorName}}</span>
+                        </div>
+                        <div class="about small-8 columns">
+                            <span class='charName'>{{charName}}</span><br>
+                            <span class='songName'>{{songName}}</span>    
+                        </div>
+                        <div class="options small-2 columns">
+                            <a href="#" id="next">Next song</a>
+                        </div>
 
-                    <div class="rhythm small-12 columns"></div>
+                        <div class="rhythm small-12 columns">{{rhythm}}</div>
+                    </script>
+                    
                 </div>
             </div>
         </div>
