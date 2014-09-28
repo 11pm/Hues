@@ -21,8 +21,6 @@ $(document).ready(function(){
 		getNextColor: function(){
 			//if at last return first
 			this.colorPos++;
-			console.log(this.colorPos)
-			console.log(colors.length)
 			if(this.colorPos === colors.length){
 				this.colorPos = 0;
 				return colors[0];
@@ -55,7 +53,7 @@ $(document).ready(function(){
 	}
 
 	var hues = {
-		
+
 		init: function(){
 			this.newRandomSong();
 		},
@@ -68,27 +66,51 @@ $(document).ready(function(){
 		},
 
 		playSong: function(obj){
-			buzz.all().stop();
+			
 
 			var songName = obj.title;
 
 			var song = new buzz.sound('audio/' + obj['-name'], {
-				formats: ['mp3']
+				formats: ['mp3'],
+				preload: true,
+				autoplay: true,
+				loop: true
 			});
-
-			song
-			.play()
-			.loop()
-			.bind( "timeupdate", function() {
-       			var timer = buzz.toTimer( this.getTime() );
+			
+			song.bind( "timeupdate", function() {
        			
-       			hues.updateView(obj, utilities.getNextColor());
+       			hues.curTime = this.getTime()
+       			setInterval(hues.doBeat(obj, this.getExactDuration(), this.getTime()), 0);
+
+       			
 
     		});
-
 		},
 
-		updateView: function(obj, color){
+		doBeat: function(obj, duration, curtime){
+			var beatMap = obj.rhythm;
+			var beatIndex = Math.floor(curtime / (duration / beatMap.length))
+			var currentBeat = beatMap[beatIndex];
+
+			var txt = '>>' + beatMap.substr(beatIndex+1);
+			var ti = 0;
+			while(txt.length < 100){
+				txt += beatMap[ti];
+				ti = (ti+1) % beatMap.length;
+			}
+			
+			//hues.updateView(obj, utilities.getNextColor());
+			hues.doAction(obj, currentBeat, txt)
+		},
+
+		doAction: function(obj, beat, txt){
+			console.log(beat)
+			if(beat !== "."){
+				hues.updateView(obj, utilities.getNextColor(), txt);
+			}
+		},
+
+		updateView: function(obj, color, txt){
 			var character = utilities.getRandomFromArray(characters);
 
 
@@ -103,7 +125,7 @@ $(document).ready(function(){
 			$('.colorName')
 			.html(color.name);
 			$('.rhythm')
-			.html(obj.rhythm.length);
+			.html(txt);
 		}
 	}
 

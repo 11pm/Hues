@@ -220,6 +220,9 @@
                 var duration = Math.round(this.sound.duration * 100) / 100;
                 return isNaN(duration) ? buzz.defaults.placeholder : duration;
             };
+            this.getExactDuration = function(){
+                return this.sound.duration;
+            };
             this.getPlayed = function() {
                 if (!supported) {
                     return null;
