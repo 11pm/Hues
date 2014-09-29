@@ -55,7 +55,7 @@ $(document).ready(function(){
 	var hues = {
 
 		init: function(){
-			this.newRandomSong();
+			this.playSong(songs[6]);
 		},
 
 		newRandomSong: function(){
@@ -80,32 +80,34 @@ $(document).ready(function(){
 			song.bind( "timeupdate", function() {
        			
        			
-       			setInterval(hues.doBeat(obj, this.getExactDuration(), this.getTime()), 20);
-
+       			//setInterval(hues.doBeat(obj, this.getExactDuration(), this.getExactTime()), 20);
+       			hues.doBeat(obj, this.getExactDuration(), this.getExactTime())
        			
 
     		});
 		},
 
 		doBeat: function(obj, duration, curtime){
-			console.log(arguments)
+			
 			var beatMap = obj.rhythm;
-			var beatIndex = Math.floor(curtime / (duration / beatMap.length))
+			console.log(beatMap.length)
+			var beatIndex = Math.round(curtime / (duration / beatMap.length))
 			var currentBeat = beatMap[beatIndex];
-
+			console.log(beatIndex)
 			var txt = '>>' + beatMap.substr(beatIndex+1);
-			var ti = 0;
-			while(txt.length < 100){
+
+			/*var ti = 0;
+			while(txt.length < 20){
 				txt += beatMap[ti];
 				ti = (ti+1) % beatMap.length;
-			}
-			
+			}*/
+			//console.log(txt)
 			//hues.updateView(obj, utilities.getNextColor());
 			hues.doAction(obj, currentBeat, txt)
 		},
 
 		doAction: function(obj, beat, txt){
-			console.log(beat)
+			
 			if(beat !== "."){
 				hues.updateView(obj, utilities.getNextColor(), txt);
 			}
@@ -118,7 +120,7 @@ $(document).ready(function(){
 			$('.main')
 			.css('background-image', 'url(' + utilities.parseSong(character) + ')')
 			.css('background-color', color.value);
-
+		
 			var template = Handlebars.compile( $('#template').html() );
 			var context = {
 				colorName: color.name,
@@ -126,7 +128,7 @@ $(document).ready(function(){
 				songName: obj.title,
 				rhythm: txt
 			};
-			$('.overlay').empty().append(template(context));
+			$('.template').html(template(context));
 		}
 	}
 

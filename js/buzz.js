@@ -187,6 +187,9 @@
                 var time = Math.round(this.sound.currentTime * 100) / 100;
                 return isNaN(time) ? buzz.defaults.placeholder : time;
             };
+            this.getExactTime = function(){
+                return this.sound.currentTime;
+            }
             this.setPercent = function(percent) {
                 if (!supported) {
                     return this;
