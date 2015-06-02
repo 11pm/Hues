@@ -3,7 +3,7 @@ angular.module('hues', ['ngAudio']);
 angular.module('hues').service('data', function($http){
 
 	var data_path = function(file){
-		return '/public/data/' + file;
+		return '/assets/data/' + file;
 	}
 
 	return {
@@ -54,7 +54,7 @@ angular.module('hues').factory('player', function(ngAudio, utils){
 
 		play: function(song){
 
-			var song = ngAudio.load('audio/' + song.source);
+			var song = ngAudio.load('/assets/audio/' + song.source);
 			song.loop = true;
 			song.play();
 
@@ -71,20 +71,6 @@ angular.module('hues').factory('player', function(ngAudio, utils){
 				that.playing.image = utils.random(that.data.images);
 				console.log('setting new image from play()')
 			}, 500);
-
-		},
-
-		playBeat: function(){
-			console.log(this)
-			function loop (player){
-				player.playing.image = utils.random(player.data.images);
-				console.log('setting new image from playBeat')
-			}
-
-			//Send our "class" into the function
-			// setInterval(function(){
-			// 	console.log(this)
-			// }, 500);
 
 		},
 

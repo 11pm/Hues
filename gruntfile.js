@@ -33,7 +33,7 @@ module.exports = function(grunt){
 					path: ['less/']
 				},
 				files: {
-					'public/style.css' : 'less/style.less'
+					'assets/style.css' : 'less/style.less'
 				}
 			}
 		},
@@ -53,7 +53,7 @@ module.exports = function(grunt){
 		concat: {
 			dist: {
 				src: js_files,
-				dest: 'public/app.js'
+				dest: 'assets/app.js'
 			}
 		}
 
