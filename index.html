@@ -1,52 +1,12 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>40 Hues JS</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <link rel="stylesheet" type="text/css" href="css/animate.css">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" type="text/css" href="css/foundation.css">
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-    </head>
-    <body>
-        <div class='main'>
-            <div class="row">
-                <div class='overlay animated'>
-                    <div class="template"></div>
-                    <script type="text/x-handlebars-template" id='template'>
-                        <div class="vol small-2 columns">
-                            <span class='colorName'>{{colorName}}</span>
-                        </div>
-                        <div class="about small-8 columns">
-                            <span class='charName'>{{charName}}</span><br>
-                            <span class='songName'>{{songName}}</span>    
-                        </div>
-                        <div class="options small-2 columns">
-                            <a href="#" id="next">Next song</a>
-                        </div>
-
-                        <div class="rhythm small-12 columns">{{rhythm}}</div>
-                    </script>
-                    
-                </div>
-            </div>
-        </div>
-        </script>
-
-        <script src="js/vendor/jquery-1.10.2.min.js"></script>
-        <script src="js/data.js"></script>
-        <script src="js/handlebars-v2.0.0.js"></script>
-        <script src="js/buzz.js"></script>
-        <script src="js/main.js"></script>
-
-    </body>
+<!DOCTYPE HTML>
+<html ng-app="hues">
+	<head>
+		<link rel="stylesheet" href="public/style.css">
+		<title>Hues</title>
+		<script src="public/app.js"></script>
+	</head>
+	<body ng-controller="HuesController" style="background: {{color.value}} url(/img/{{image.path}})">
+		<h1>Hello from <span ng-bind="image.name"></span></h1>
+		
+	</body>
 </html>
